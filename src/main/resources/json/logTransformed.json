@@ -1,0 +1,14 @@
+{
+  "username": "wrong-unkempt-baikalseal",
+  "event_type": "/api/edx_proctoring/v1/proctored_exam/attempt",
+  "ip": "anon_820e7530c72cee3f7642f2f109522de64a2f25025182a61713116a563aa04228",
+  "agent": "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36",
+  "host": "courses.openedu.ru",
+  "referer": "https://courses.openedu.ru/courses/course-v1:spbstu+PHYLOS+fall_2018/progress",
+  "accept_language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+  "event": "{\"POST\": {}, \"GET\": {}}",
+  "event_source": "server",
+  "context":"",
+  "time": "2019-02-28T20:01:43.911936+00:00",
+  "page": null
+}

@@ -1,16 +1,56 @@
-plugins {
-    id 'java'
+apply plugin: 'java'
+apply plugin: 'jsonschema2pojo'
+
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.jsonschema2pojo:jsonschema2pojo-gradle-plugin:latest.integration'
+    }
 }
-
-group 'cl-injector'
-version '1.0-SNAPSHOT'
-
-sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation 'javax.validation:validation-api:1.1.0.CR2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.1'
+
+    // see src/main/resources/json/external_dependencies.json
+    implementation 'joda-time:joda-time:2.2'
 }
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'barsukov.softdev.Main'
+    }
+}
+
+jsonSchema2Pojo {
+    source = files("${project.rootDir}/src/main/resources/json")
+    generateBuilders = false
+    usePrimitives = false
+    targetPackage = 'model'
+    propertyWordDelimiters = [] as char[]
+    useLongIntegers = false
+    useDoubleNumbers = true
+    includeHashcodeAndEquals = true
+    includeToString = true
+    includeJsr303Annotations = false
+    sourceType = 'json'
+    boolean removeOldOutput = true
+    String outputEncoding = 'UTF-8'
+    boolean useJodaDates = false
+    boolean useCommonsLang3 = false
+    boolean initializeCollections = true
+    serializable = true
+}
+
+group 'cl-injector'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 11
