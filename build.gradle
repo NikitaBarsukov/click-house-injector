@@ -18,15 +18,17 @@ repositories {
 
 dependencies {
     implementation 'javax.validation:validation-api:1.1.0.CR2'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.1'
-
-    // see src/main/resources/json/external_dependencies.json
-    implementation 'joda-time:joda-time:2.2'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.12.2'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.12.2'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.12.2'
 }
 
 jar {
     manifest {
         attributes 'Main-Class': 'barsukov.softdev.Main'
+    }
+    from {
+        configurations.runtimeClasspath.filter{ it.exists() }.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
@@ -40,14 +42,16 @@ jsonSchema2Pojo {
     useDoubleNumbers = true
     includeHashcodeAndEquals = true
     includeToString = true
-    includeJsr303Annotations = false
+    annotationStyle = 'jackson2'
     sourceType = 'json'
     boolean removeOldOutput = true
     String outputEncoding = 'UTF-8'
     boolean useJodaDates = false
     boolean useCommonsLang3 = false
     boolean initializeCollections = true
+    includeAdditionalProperties = false
     serializable = true
+    inclusionLevel = 'ALWAYS'
 }
 
 group 'cl-injector'
