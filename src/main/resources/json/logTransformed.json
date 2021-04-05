@@ -8,7 +8,9 @@
   "accept_language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
   "event": "{\"POST\": {}, \"GET\": {}}",
   "event_source": "server",
-  "context":"",
+  "name": "pause_video",
+  "session": "31f7b7ef6526c5366f832645af53c9c3",
+  "context": "",
   "time": "2019-02-28T20:01:43.911936+00:00",
   "page": null
 }

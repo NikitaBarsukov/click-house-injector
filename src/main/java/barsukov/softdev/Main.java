@@ -35,18 +35,14 @@ public class Main {
             System.exit(1);
         }
 
-        ProgressBar progressBar = new ProgressBar();
-        try {
+        try (
             Stream<String> lines = Files.lines(Paths.get(f), Charset.defaultCharset());
             RandomAccessFile oStream = new RandomAccessFile(o, "rw");
             RandomAccessFile eStream = new RandomAccessFile(e, "rw");
             FileChannel oChannel = oStream.getChannel();
             FileChannel eChannel = eStream.getChannel();
-
+        ) {
             lines.forEachOrdered(line -> transformLog(line, oChannel, eChannel, new File(f).length()));
-
-        } catch (Exception e) {
-
         }
     }
 
@@ -55,7 +51,7 @@ public class Main {
         try {
             LogOriginal log = mapper.readValue(line, LogOriginal.class);
             map(log, logtransformed);
-            byte[] strBytes = mapper.writeValueAsBytes(logtransformed);
+            byte[] strBytes = (mapper.writeValueAsString(logtransformed) + "\r\n").getBytes(StandardCharsets.UTF_8);
             ByteBuffer buffer = ByteBuffer.allocate(strBytes.length);
             buffer.put(strBytes);
             buffer.flip();
@@ -63,7 +59,7 @@ public class Main {
             processedBytes += strBytes.length;
         } catch (IOException e) {
             try {
-                byte[] strBytes = line.getBytes(StandardCharsets.UTF_8);
+                byte[] strBytes = (line + "\r\n").getBytes(StandardCharsets.UTF_8);
                 ByteBuffer buffer = ByteBuffer.allocate(strBytes.length);
                 buffer.put(strBytes);
                 buffer.flip();

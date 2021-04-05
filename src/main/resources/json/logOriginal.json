@@ -8,8 +8,11 @@
   "accept_language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
   "event": "{\"POST\": {}, \"GET\": {}}",
   "event_source": "server",
+  "name": "pause_video",
+  "session": "31f7b7ef6526c5366f832645af53c9c3",
   "context": {
     "user_id": 1161316,
+    "course_user_tags": {},
     "org_id": "",
     "course_id": "",
     "path": "/api/edx_proctoring/v1/proctored_exam/attempt"
